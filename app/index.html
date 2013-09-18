@@ -19,16 +19,22 @@
     </head>
     <body>
       <div class="container">
-        <div class="hero-unit">
-          <h1>commonsense-js</h1>
+        <div class="row">
+          <h1>commonsense-js demo</h1>
         </div>
-        <form class="form">
-          <label name="username">Username</label><input type="text" name="username" /><br />
-          <label name="password">Password</label><input type="password" name="password" /><br />
-          <div id="submit" class="button">Submit!</div>
-        </form>
-        <ul id="log">
-        </ul>
+        <div class="row">
+          <div class="span4">
+            <form class="form-horizontal">
+              <label name="username">Username</label><input type="text" name="username" /><br />
+              <label name="password">Password</label><input type="password" name="password" /><br />
+              <button id="submit" class="btn">Submit!</button>
+            </form>
+          </div>
+          <div class="span8">
+            <h3>Log:</h3>
+            <ul id="log">
+            </ul>
+          </div>
       </div>
 
         <!--[if lt IE 7]>

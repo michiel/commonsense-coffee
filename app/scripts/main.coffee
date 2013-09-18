@@ -18,8 +18,13 @@ $ ->
       $("input[name=username]")[0].value,
       $("input[name=password]")[0].value
     )
+    false
 
 window.logme = (msg)->
   $("#log").append(
     $("<li>").text(msg)
   )
+
+$ ->
+  logme "Loaded and ready to go .. fill in your api.sense-os.nl details to the left ..."
+
