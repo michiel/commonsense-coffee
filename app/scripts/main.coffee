@@ -14,8 +14,9 @@ doStuff =(username, password)->
 $ ->
   $("#submit").click (e)->
     logme "Doing stuff ..."
+    e.preventDefault()
     doStuff(
-      $("input[name=username]")[0].value,
+      $("input[name=username]")[0].value
       $("input[name=password]")[0].value
     )
     false

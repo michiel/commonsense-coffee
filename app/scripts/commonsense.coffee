@@ -15,6 +15,7 @@ class SenseApi
     $.ajaxSetup
       type        : "POST"
       dataType    : 'json'
+      crossDomain : true
       contentType : "application/json; charset=UTF-8"
 
   #
