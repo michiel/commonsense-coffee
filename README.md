@@ -16,3 +16,7 @@ Development,
  - CoffeeScript
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/michiel/commonsense-coffee/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
