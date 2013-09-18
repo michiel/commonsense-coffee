@@ -70,6 +70,13 @@ class SenseApi
         err(res) if err
       )
 
+  setServer: (srv)->
+    if srv in senseServers
+      @serverType = srv
+      @serverUrl  = senseServers[srv]
+    else
+      @log "Invalid server type #{srv} passed"
+
   get: (type, id, succ, err)->
     @sense_api("GET", "/#{type}s/#{id}.json", {}, succ, err)
 
