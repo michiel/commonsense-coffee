@@ -22,6 +22,13 @@
         <div class="hero-unit">
           <h1>commonsense-js</h1>
         </div>
+        <form class="form">
+          <label name="username">Username</label><input type="text" name="username" /><br />
+          <label name="password">Password</label><input type="password" name="password" /><br />
+          <div id="submit" class="button">Submit!</div>
+        </form>
+        <ul id="log">
+        </ul>
       </div>
 
         <!--[if lt IE 7]>
@@ -31,11 +38,11 @@
         <!-- build:js scripts/main.js -->
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="scripts/vendor/md5.js"></script>
-        <script src="scripts/main.js"></script>
+        <script src="scripts/commonsense.js"></script>
         <!-- endbuild -->
 
         <!-- build:js(.tmp) scripts/coffee.js -->
-        <script src="scripts/commonsense.js"></script>
+        <script src="scripts/main.js"></script>
         <!-- endbuild -->
 
         <!-- build:js scripts/plugins.js -->

@@ -13,7 +13,6 @@ class SenseApi
       @[arg] = args[arg]
 
     $.ajaxSetup
-      global      : true
       type        : "POST"
       dataType    : 'json'
       contentType : "application/json; charset=UTF-8"
@@ -42,12 +41,7 @@ class SenseApi
   # JS/API functions
   #
 
-  getSessionId: (cb, err)->
-    @sense_api(params, (ret)->
-      cb(ret)
-    )
-
-  authenticateSessionId: (username, password)->
+  authenticateSessionId: (username, password, succ, err)->
     hash = CryptoJS.MD5(password).toString()
     params =
       username : username,
@@ -57,15 +51,24 @@ class SenseApi
       ((res)=>
         @log "login ok : id #{res.session_id}"
         @sessionId = res.session_id
+        succ(res) if succ
       ),
-      (()=>
+      ((res)=>
         @log "login not ok"
+        err(res) if err
       )
 
-  @logoutSessionId: ()->
+  logoutSessionId: (succ, err)->
     @sense_api "POST", '/@logout.json', {},
-      (()=> @log "logout ok"),
-      (()=> @log "logout not ok")
+      ((res)=>
+        @log "logout ok"
+        @sessionId = null
+        succ(res) if succ
+      ),
+      ((res)=>
+        @log "logout not ok"
+        err(res) if err
+      )
 
   get: (type, id, succ, err)->
     @sense_api("GET", "/#{type}s/#{id}.json", {}, succ, err)
@@ -73,14 +76,18 @@ class SenseApi
   getAll: (type, succ, err)->
     @sense_api("GET", "/#{type}s.json", {}, succ, err)
 
-  sense_api : (method, url, data, succ, err)->
+  sense_api : (method, url, data={}, succ=(->), err=(->))->
+
+    if !@sessionId and url != '/login.json'
+      throw new Error "No valid session! Login first or wait for login to complete!"
+
     $.ajax
       type       : method
       url        : "#{@serverUrl}#{url}"
       data       : JSON.stringify(data)
       success    : succ
       error      : err
-      beforeSend : (req)->
+      beforeSend : (req)=>
         req.setRequestHeader("X-SESSION_ID", @sessionId) if @sessionId != ''
 
   log : (msg)=>
